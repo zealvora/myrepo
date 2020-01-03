@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: kplabs-service
+  name: kplabs-fix
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: kplabs-fix
+  template:
+    metadata:
+      labels:
+        run: kplabs-fix
+    spec:
+      containers:
+      - image: nginx
+        name: kplabs-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fix-service
+  labels:
+    run: fix-service
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    run: kplabs-fix
