@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: newkplabs
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: troubleshoot-deployment
+  name: troubleshoot-deployment
+  namespace: newkplabs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: troubleshoot-deployment
+  template:
+    metadata:
+      labels:
+        run: troubleshoot-deployment
+    spec:
+      containers:
+      - image: ninx
+        name: troubleshoot-deployment
