@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: selector
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+  namespace: selector
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep","36000"]
+    securityContext:
+      readOnlyRootFilesystem: true
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  namespace: selector
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep","36000"]
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3
+  namespace: selector
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep","36000"]
+    securityContext:
+       privileged: true
